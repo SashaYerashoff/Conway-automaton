@@ -6,7 +6,12 @@ namespace GameOfLife
     {
         public static void Main(string[] args)
         {
-            
+            //Console.WriteLine("Please input field height: ");
+            //dishHeight = Convert.ToInt32(Console.ReadLine());
+
+            //Console.WriteLine("Please input field width: ");
+            //dishWidth = Convert.ToInt32(Console.ReadLine());
+
             PopulatePetriDishRandomly();
 
             for (int i = 1; i < iterationsOfLife; i++)
@@ -18,10 +23,10 @@ namespace GameOfLife
             Console.ReadLine();
         }
 
-        static int threadDelay = 500;
-        static int iterationsOfLife = 100;
-        static int dishHeight;
-        static int dishWidth;
+        static int threadDelay = 30;
+        static int iterationsOfLife = 300;
+        static int dishHeight = 28;
+        static int dishWidth = 28;
         static bool[,] petriDishInitial = new bool[dishHeight, dishWidth];
         //{ 
         //    { false, false, false, false, false }, 
@@ -31,17 +36,17 @@ namespace GameOfLife
         //    { false, false, false, false, false }
         //};
         static bool[,] petriDishOutput = new bool[dishHeight, dishWidth];
-        static int populationIntensity = 2;
+        static int populationIntensity = 3;
         const char livingCellSymbol = '*';
-        const char deadCellSymbol = '-';
+        const char deadCellSymbol = ' ';
         
 
         public static int FindNeighbours(int row, int column)
         {
 
             int count = 0;
-            int rowLimit = dishWidth - 1;
-            int columnLimit = dishHeight - 1;
+            int rowLimit = dishHeight - 1;
+            int columnLimit = dishWidth - 1;
             for (int rowToCheck = row - 1; rowToCheck <= row + 1; rowToCheck++)
             {
                 for (int columnToCheck = column - 1; columnToCheck <= column + 1; columnToCheck++)
@@ -136,6 +141,7 @@ namespace GameOfLife
                 Console.WriteLine();
             }
             Console.SetCursorPosition(0, Console.WindowTop);
+            Console.CursorVisible = false;
             System.Threading.Thread.Sleep(threadDelay);
             //Console.ReadLine();
         }
