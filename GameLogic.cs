@@ -4,10 +4,9 @@ namespace GameOfLife
 {
     public class GameLogic
     {
-        public static bool[,] fieldInitial = new bool[Settings.fieldHeight, Settings.fieldWidth];
-        private static bool[,] fieldOutput = new bool[Settings.fieldHeight, Settings.fieldWidth];
-
-
+        
+        public static bool[,] fieldInitial = new bool[Settings.FieldHeight, Settings.FieldWidth];
+        private static bool[,] fieldOutput = new bool[Settings.FieldHeight, Settings.FieldWidth];
 
         public static bool PopulateCellRandomly(int amount)
         {
@@ -25,9 +24,9 @@ namespace GameOfLife
 
         public static void PopulateFieldRandomly()
         {
-            for (int cellRowPosition = 0; cellRowPosition < Settings.fieldHeight; cellRowPosition++)
+            for (int cellRowPosition = 0; cellRowPosition < Settings.FieldHeight; cellRowPosition++)
             {
-                for (int cellColumnPosition = 0; cellColumnPosition < Settings.fieldWidth; cellColumnPosition++)
+                for (int cellColumnPosition = 0; cellColumnPosition < Settings.FieldWidth; cellColumnPosition++)
                 {
                     fieldInitial[cellRowPosition, cellColumnPosition] = PopulateCellRandomly(Settings.chanceToBeAlive);
                 }
@@ -37,8 +36,8 @@ namespace GameOfLife
         public static int FindNeighbours(int row, int column)
         {
             int count = 0;
-            int rowLimit = Settings.fieldHeight - 1;
-            int columnLimit = Settings.fieldWidth - 1;
+            int rowLimit = Settings.FieldHeight - 1;
+            int columnLimit = Settings.FieldWidth - 1;
 
             for (int rowToCheck = row - 1; rowToCheck <= row + 1; rowToCheck++)
             {
@@ -59,9 +58,9 @@ namespace GameOfLife
 
         public static void RepopulateField()
         {
-            for (int cellRowPosition = 0; cellRowPosition < Settings.fieldHeight; cellRowPosition++)
+            for (int cellRowPosition = 0; cellRowPosition < Settings.FieldHeight; cellRowPosition++)
             {
-                for (int cellColumnPosition = 0; cellColumnPosition < Settings.fieldWidth; cellColumnPosition++)
+                for (int cellColumnPosition = 0; cellColumnPosition < Settings.FieldWidth; cellColumnPosition++)
                 {
                     int cellNeighbours = FindNeighbours(cellRowPosition, cellColumnPosition);
 
@@ -83,9 +82,9 @@ namespace GameOfLife
                     }
                 }
             }
-            for (int cellRowPosition = 0; cellRowPosition < Settings.fieldHeight; cellRowPosition++)
+            for (int cellRowPosition = 0; cellRowPosition < Settings.FieldHeight; cellRowPosition++)
             {
-                for (int cellColumnPosition = 0; cellColumnPosition < Settings.fieldWidth; cellColumnPosition++)
+                for (int cellColumnPosition = 0; cellColumnPosition < Settings.FieldWidth; cellColumnPosition++)
                 {
                     fieldInitial[cellRowPosition, cellColumnPosition] = fieldOutput[cellRowPosition, cellColumnPosition];
                 }
