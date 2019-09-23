@@ -1,22 +1,26 @@
-﻿using System;
-
+﻿
 namespace GameOfLife
 {
     class Program
     {
-        public void Main(string[] args)
+        public static void Main(string[] args)
         {
             ConsoleInput consoleIn = new ConsoleInput();
-            Settings setField = new Settings(consoleIn.GetHeight(), consoleIn.GetWidth());
-            ConsoleOutput consoleOut = new ConsoleOutput();
-            GameLogic.PopulateFieldRandomly();
 
-            for (int generation = 1; generation < Settings.amountOfGenerations; generation++)
+            int height = consoleIn.GetHeight();
+            int width = consoleIn.GetWidth();
+            Settings fieldSize = new Settings(height, width);
+
+            GameLogic game = new GameLogic(height, width);
+            ConsoleOutput consoleOut = new ConsoleOutput();
+            game.PopulateFieldRandomly(height, width);
+
+            for (int generation = 0; generation < Settings.amountOfGenerations; generation++)
             {
-                consoleOut.PrintArray(GameLogic.fieldInitial);
-                GameLogic.RepopulateField();   
+                consoleOut.PrintArray(game.fieldInitial);
+                game.RepopulateField(height, width);   
             }
-            consoleOut.PrintFinalStats();
+            consoleOut.PrintFinalStats(height);
         }   
     }
 }

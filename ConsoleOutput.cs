@@ -7,10 +7,9 @@ namespace GameOfLife
         public void PrintArray(bool[,] fieldToPrint)
         {
             Console.Clear();
-
-            for (int cellRowPosition = 0; cellRowPosition < Settings.FieldHeight; cellRowPosition++)
+            for (int cellRowPosition = 0; cellRowPosition < fieldToPrint.GetLength(0); cellRowPosition++)
             {
-                for (int cellColumnPosition = 0; cellColumnPosition < Settings.FieldWidth; cellColumnPosition++)
+                for (int cellColumnPosition = 0; cellColumnPosition < fieldToPrint.GetLength(1); cellColumnPosition++)
                 {
                     if (fieldToPrint[cellRowPosition, cellColumnPosition] == true)
                     {
@@ -27,22 +26,14 @@ namespace GameOfLife
             Console.CursorVisible = false;
             System.Threading.Thread.Sleep(Settings.threadDelay);
         }
-        public void PrintFinalStats()
+        public void PrintFinalStats(int height)
         {
-            Console.SetCursorPosition(0, Settings.FieldWidth);
-            Console.WriteLine("Game iterated {0} times", Settings.amountOfGenerations);
+            Console.SetCursorPosition(0, height);
+            Console.WriteLine("Field iterated {0} times", Settings.amountOfGenerations);
             Console.ReadLine();
         }
 
-        public void AskForHeight()
-        {
-            Console.Write("Please input field height: ");
-        }
-
-        public void AskForWidth()
-        {
-            Console.Write("Please input field width: ");
-        }
+       
     }
 
 }
