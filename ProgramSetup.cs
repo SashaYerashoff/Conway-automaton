@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 namespace GameOfLife
 {
     public class ProgramSetup
@@ -11,16 +11,19 @@ namespace GameOfLife
             int width = consoleIn.GetWidth();
 
             GameLogic game = new GameLogic(height, width);
-            FieldDrawer consoleOut = new FieldDrawer();
+            FieldDrawer drawer = new FieldDrawer();
             ConsoleSupportOut finalization = new ConsoleSupportOut();
             game.PopulateFieldRandomly(height, width);
 
-            for (int generation = 0; generation < Constants.amountOfGenerations; generation++)
+            int iterationCount = 0;
+            while (!(Console.KeyAvailable && 
+                     Console.ReadKey(true).Key == ConsoleKey.Escape))
             {
-                consoleOut.PrintArray(game.fieldInitial);
+                drawer.PrintArray(game.fieldInitial);
                 game.RepopulateField(height, width);
+                iterationCount++;
             }
-            finalization.PrintFinalStats(height);
+            finalization.PrintFinalStats(height, iterationCount);
         }
     }
 }

@@ -14,10 +14,10 @@ namespace GameOfLife
             Console.Write("Please input field width: ");
         }
 
-        public void PrintFinalStats(int height)
+        public void PrintFinalStats(int height, int iterationCount)
         {
             Console.SetCursorPosition(0, height);
-            Console.WriteLine("Field iterated {0} times", Constants.amountOfGenerations);
+            Console.WriteLine("Field iterated {0} times", iterationCount);
             Console.ReadLine();
         }
     }
