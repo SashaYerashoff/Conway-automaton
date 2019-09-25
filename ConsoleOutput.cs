@@ -13,27 +13,20 @@ namespace GameOfLife
                 {
                     if (fieldToPrint[cellRowPosition, cellColumnPosition] == true)
                     {
-                        Console.Write(Settings.livingCellSymbol + " ");
+                        Console.Write(Constants.livingCellSymbol + " ");
                     }
                     else
                     {
-                        Console.Write(Settings.deadCellSymbol + " ");
+                        Console.Write(Constants.deadCellSymbol + " ");
                     }
                 }
                 Console.WriteLine();
             }
             Console.SetCursorPosition(0, Console.WindowTop);
             Console.CursorVisible = false;
-            System.Threading.Thread.Sleep(Settings.threadDelay);
-        }
-        public void PrintFinalStats(int height)
-        {
-            Console.SetCursorPosition(0, height);
-            Console.WriteLine("Field iterated {0} times", Settings.amountOfGenerations);
-            Console.ReadLine();
+            System.Threading.Thread.Sleep(Constants.threadDelay);
         }
 
        
     }
-
 }

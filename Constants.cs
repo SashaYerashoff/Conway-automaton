@@ -1,11 +1,8 @@
 ﻿
 namespace GameOfLife
 {
-    public class Settings
-    {  
-        public int FieldHeight { get; set; }
-        public int FieldWidth { get; set; }
-
+    public class Constants
+    {
         public const int chanceToBeAlive = 2;
         public const int aliveLowerLimit = 3;
         public const int aliveUpperLimit = 4;
@@ -14,11 +11,5 @@ namespace GameOfLife
         public const int amountOfGenerations = 100;
         public const char livingCellSymbol = '*';
         public const char deadCellSymbol = ' ';
-
-        public Settings(int fieldHeight, int fieldWidth)
-        {
-            FieldHeight = fieldHeight;
-            FieldWidth = fieldWidth;
-        }
     }
 }

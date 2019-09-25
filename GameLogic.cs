@@ -12,11 +12,11 @@ namespace GameOfLife
             fieldInitial = new bool[height, width];
             fieldOutput = new bool[height, width];
         }
-        public bool PopulateCellRandomly(int amount)
+        public bool PopulateCellRandomly(int chance)
         {
             var rand = new Random();
 
-            if (rand.Next(amount) == 1)
+            if (rand.Next(chance) == 1)
             {
                 return true;
             }
@@ -32,7 +32,7 @@ namespace GameOfLife
             {
                 for (int cellColumnPosition = 0; cellColumnPosition < width; cellColumnPosition++)
                 {
-                    fieldInitial[cellRowPosition, cellColumnPosition] = PopulateCellRandomly(Settings.chanceToBeAlive);
+                    fieldInitial[cellRowPosition, cellColumnPosition] = PopulateCellRandomly(Constants.chanceToBeAlive);
                 }
             }
         }
@@ -68,14 +68,14 @@ namespace GameOfLife
                 {
                     int cellNeighbours = FindNeighbours(cellRowPosition, cellColumnPosition);
 
-                    if ((cellNeighbours == Settings.aliveLowerLimit ||
-                         cellNeighbours == Settings.aliveUpperLimit) &&
+                    if ((cellNeighbours == Constants.aliveLowerLimit ||
+                         cellNeighbours == Constants.aliveUpperLimit) &&
                          fieldInitial[cellRowPosition, cellColumnPosition] == true)
                     {
                         fieldOutput[cellRowPosition, cellColumnPosition] = true;
                     }
 
-                    else if (cellNeighbours == Settings.aliveByReproduction &&
+                    else if (cellNeighbours == Constants.aliveByReproduction &&
                              fieldInitial[cellRowPosition, cellColumnPosition] == false)
                     {
                         fieldOutput[cellRowPosition, cellColumnPosition] = true;
@@ -86,6 +86,7 @@ namespace GameOfLife
                     }
                 }
             }
+
             for (int cellRowPosition = 0; cellRowPosition < height; cellRowPosition++)
             {
                 for (int cellColumnPosition = 0; cellColumnPosition < width; cellColumnPosition++)
