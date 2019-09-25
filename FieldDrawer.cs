@@ -3,7 +3,7 @@
 namespace GameOfLife
 {
     public class FieldDrawer
-    {
+    { 
         public void PrintArray(bool[,] fieldToPrint)
         {
             Console.Clear();
@@ -24,9 +24,7 @@ namespace GameOfLife
             }
             Console.SetCursorPosition(0, Console.WindowTop);
             Console.CursorVisible = false;
-            System.Threading.Thread.Sleep(Constants.threadDelay);
-        }
 
-       
+        }
     }
 }

@@ -14,11 +14,16 @@ namespace GameOfLife
             Console.Write("Please input field width: ");
         }
 
-        public void PrintFinalStats(int height, int iterationCount)
+        public void PrintCountOfIterations(int height, int iterationCount)
         {
             Console.SetCursorPosition(0, height);
-            Console.WriteLine("Field iterated {0} times", iterationCount);
-            Console.ReadLine();
+            Console.WriteLine("Field iterated {0} times", iterationCount);   
+        }
+
+        public void PrintAliveCellsAmount (int aliveCells, int height)
+        {
+            Console.SetCursorPosition(0, height + 1);
+            Console.WriteLine("Alive cells: {0}", aliveCells);
         }
     }
 }

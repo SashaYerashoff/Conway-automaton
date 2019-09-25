@@ -5,8 +5,8 @@ namespace GameOfLife
     {
         public static void Main(string[] args)
         {
-            ProgramSetup runProgram = new ProgramSetup();
-            runProgram.Run();
+            ProgramSetup game = new ProgramSetup();
+            game.Run();
         }   
     }
 }

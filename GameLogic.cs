@@ -12,6 +12,7 @@ namespace GameOfLife
             fieldInitial = new bool[height, width];
             fieldOutput = new bool[height, width];
         }
+
         public bool PopulateCellRandomly(int chance)
         {
             var rand = new Random();
@@ -67,16 +68,17 @@ namespace GameOfLife
                 for (int cellColumnPosition = 0; cellColumnPosition < width; cellColumnPosition++)
                 {
                     int cellNeighbours = FindNeighbours(cellRowPosition, cellColumnPosition);
+                    bool aliveLow = cellNeighbours == Constants.aliveLowerLimit;
+                    bool aliveHigh = cellNeighbours == Constants.aliveUpperLimit;
+                    bool reproduce = cellNeighbours == Constants.aliveByReproduction;
+                    bool cellIsAlive = fieldInitial[cellRowPosition, cellColumnPosition] == true;
 
-                    if ((cellNeighbours == Constants.aliveLowerLimit ||
-                         cellNeighbours == Constants.aliveUpperLimit) &&
-                         fieldInitial[cellRowPosition, cellColumnPosition] == true)
+                    if ((aliveLow || aliveHigh) && cellIsAlive)
                     {
                         fieldOutput[cellRowPosition, cellColumnPosition] = true;
                     }
 
-                    else if (cellNeighbours == Constants.aliveByReproduction &&
-                             fieldInitial[cellRowPosition, cellColumnPosition] == false)
+                    else if ( reproduce && !cellIsAlive)
                     {
                         fieldOutput[cellRowPosition, cellColumnPosition] = true;
                     }
