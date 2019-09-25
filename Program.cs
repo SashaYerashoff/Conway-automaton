@@ -3,10 +3,10 @@ namespace GameOfLife
 {
     class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            ProgramSetup game = new ProgramSetup();
-            game.Run();
+            CoonsoleGameLauncher gameWithOutput = new CoonsoleGameLauncher();
+            gameWithOutput.Run();
         }   
     }
 }

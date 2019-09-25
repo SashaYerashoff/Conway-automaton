@@ -1,7 +1,8 @@
 ﻿using System;
+
 namespace GameOfLife
 {
-    public class ProgramSetup
+    public class CoonsoleGameLauncher
     {
         public void Run()
         {
@@ -10,21 +11,21 @@ namespace GameOfLife
             int height = consoleIn.GetHeight();
             int width = consoleIn.GetWidth();
             int iterationCount = 0;
-            //int aliveCellsAmount = 0;
-
-            GameLogic game = new GameLogic(height, width);
+            
+            FieldModel field = new FieldModel(height, width);
+            GameLogic game = new GameLogic();
             FieldDrawer drawer = new FieldDrawer();
             ConsoleSupportOut ConsoleOut = new ConsoleSupportOut();
             AliveCellCounter countCells = new AliveCellCounter();
 
-            game.PopulateFieldRandomly(height, width);
+            game.PopulateFieldRandomly(height, width, field.gameField);
 
             while (!(Console.KeyAvailable && 
                      Console.ReadKey(true).Key == ConsoleKey.Escape))
             {
-                int aliveCellsAmount = countCells.CountAliveCells(game.fieldInitial);
-                drawer.PrintArray(game.fieldInitial);
-                game.RepopulateField(height, width);
+                int aliveCellsAmount = countCells.CountAliveCells(field.gameField);
+                drawer.PrintArray(field.gameField);
+                game.RepopulateField(height, width, field.gameField, field.gameFieldBuffer);
                 iterationCount++; 
 
                 ConsoleOut.PrintAliveCellsAmount(aliveCellsAmount, height);

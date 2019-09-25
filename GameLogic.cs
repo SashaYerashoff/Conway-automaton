@@ -4,15 +4,6 @@ namespace GameOfLife
 {
     public class GameLogic
     {
-        public bool[,] fieldInitial;
-        private bool[,] fieldOutput;
-
-        public GameLogic(int height, int width)
-        {
-            fieldInitial = new bool[height, width];
-            fieldOutput = new bool[height, width];
-        }
-
         public bool PopulateCellRandomly(int chance)
         {
             var rand = new Random();
@@ -27,22 +18,22 @@ namespace GameOfLife
             }
         }
 
-        public void PopulateFieldRandomly(int height, int width)
+        public void PopulateFieldRandomly(int height, int width, bool[,] gameField)
         {
             for (int cellRowPosition = 0; cellRowPosition < height; cellRowPosition++)
             {
                 for (int cellColumnPosition = 0; cellColumnPosition < width; cellColumnPosition++)
                 {
-                    fieldInitial[cellRowPosition, cellColumnPosition] = PopulateCellRandomly(Constants.chanceToBeAlive);
+                    gameField[cellRowPosition, cellColumnPosition] = PopulateCellRandomly(Constants.chanceToBeAlive);
                 }
             }
         }
 
-        public int FindNeighbours(int row, int column)
+        public int FindNeighbours(int row, int column, bool[,] gameField)
         {
             int count = 0;
-            int rowLimit = fieldInitial.GetLength(0) - 1;
-            int columnLimit = fieldInitial.GetLength(1) - 1;
+            int rowLimit = gameField.GetLength(0) - 1;
+            int columnLimit = gameField.GetLength(1) - 1;
 
             for (int rowToCheck = row - 1; rowToCheck <= row + 1; rowToCheck++)
             {
@@ -52,7 +43,7 @@ namespace GameOfLife
                           columnToCheck < 0 ||
                           rowToCheck > rowLimit ||
                           columnToCheck > columnLimit) &&
-                          fieldInitial[rowToCheck, columnToCheck] == true)
+                          gameField[rowToCheck, columnToCheck] == true)
                     {
                         count++;
                     }
@@ -61,30 +52,30 @@ namespace GameOfLife
             return count;
         }
 
-        public void RepopulateField(int height, int width)
+        public void RepopulateField(int height, int width, bool[,] gameField, bool[,] gameFieldBuffer)
         {
             for (int cellRowPosition = 0; cellRowPosition < height; cellRowPosition++)
             {
                 for (int cellColumnPosition = 0; cellColumnPosition < width; cellColumnPosition++)
                 {
-                    int cellNeighbours = FindNeighbours(cellRowPosition, cellColumnPosition);
+                    int cellNeighbours = FindNeighbours(cellRowPosition, cellColumnPosition, gameField);
                     bool aliveLow = cellNeighbours == Constants.aliveLowerLimit;
                     bool aliveHigh = cellNeighbours == Constants.aliveUpperLimit;
                     bool reproduce = cellNeighbours == Constants.aliveByReproduction;
-                    bool cellIsAlive = fieldInitial[cellRowPosition, cellColumnPosition] == true;
+                    bool cellIsAlive = gameField[cellRowPosition, cellColumnPosition] == true;
 
                     if ((aliveLow || aliveHigh) && cellIsAlive)
                     {
-                        fieldOutput[cellRowPosition, cellColumnPosition] = true;
+                        gameFieldBuffer[cellRowPosition, cellColumnPosition] = true;
                     }
 
                     else if ( reproduce && !cellIsAlive)
                     {
-                        fieldOutput[cellRowPosition, cellColumnPosition] = true;
+                        gameFieldBuffer[cellRowPosition, cellColumnPosition] = true;
                     }
                     else
                     {
-                        fieldOutput[cellRowPosition, cellColumnPosition] = false;
+                        gameFieldBuffer[cellRowPosition, cellColumnPosition] = false;
                     }
                 }
             }
@@ -93,7 +84,7 @@ namespace GameOfLife
             {
                 for (int cellColumnPosition = 0; cellColumnPosition < width; cellColumnPosition++)
                 {
-                    fieldInitial[cellRowPosition, cellColumnPosition] = fieldOutput[cellRowPosition, cellColumnPosition];
+                    gameField[cellRowPosition, cellColumnPosition] = gameFieldBuffer[cellRowPosition, cellColumnPosition];
                 }
             }
         }
