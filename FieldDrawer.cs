@@ -2,7 +2,7 @@
 
 namespace GameOfLife
 {
-    public class ConsoleOutput
+    public class FieldDrawer
     {
         public void PrintArray(bool[,] fieldToPrint)
         {

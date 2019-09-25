@@ -11,7 +11,7 @@ namespace GameOfLife
             int width = consoleIn.GetWidth();
 
             GameLogic game = new GameLogic(height, width);
-            ConsoleOutput consoleOut = new ConsoleOutput();
+            FieldDrawer consoleOut = new FieldDrawer();
             ConsoleSupportOut finalization = new ConsoleSupportOut();
             game.PopulateFieldRandomly(height, width);
 
