@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace GameOfLife
+namespace ConwayAutomaton
 {
-    public class CoonsoleGameLauncher
+    public class ConsoleGameLauncher
     {
         public void Run()
         {

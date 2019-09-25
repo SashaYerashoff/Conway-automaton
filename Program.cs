@@ -1,11 +1,11 @@
 ﻿
-namespace GameOfLife
+namespace ConwayAutomaton
 {
     class Program
     {
         public static void Main()
         {
-            CoonsoleGameLauncher gameWithOutput = new CoonsoleGameLauncher();
+            ConsoleGameLauncher gameWithOutput = new ConsoleGameLauncher();
             gameWithOutput.Run();
         }   
     }

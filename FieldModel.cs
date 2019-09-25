@@ -1,5 +1,5 @@
 ﻿
-namespace GameOfLife
+namespace ConwayAutomaton
 {
     public class FieldModel
     { 

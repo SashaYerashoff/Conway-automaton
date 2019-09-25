@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameOfLife
+namespace ConwayAutomaton
 {
     public class ConsoleInput
     {

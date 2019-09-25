@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameOfLife
+namespace ConwayAutomaton
 {
     public class FieldDrawer
     { 
@@ -21,7 +21,7 @@ namespace GameOfLife
                     }
                 }
                 Console.WriteLine();
-            }
+            } 
             Console.SetCursorPosition(0, Console.WindowTop);
             Console.CursorVisible = false;
 
