@@ -26,8 +26,9 @@ namespace ConwayAutomaton
                 int aliveCellsAmount = countCells.CountAliveCells(field.gameField);
                 drawer.PrintArray(field.gameField);
                 game.RepopulateField(height, width, field.gameField, field.gameFieldBuffer);
-                iterationCount++; 
-
+                game.OverwriteGameField(height, width, field.gameField, field.gameFieldBuffer);
+                iterationCount++;
+                ConsoleOut.stopGameMessage(height);
                 ConsoleOut.PrintAliveCellsAmount(aliveCellsAmount, height);
                 ConsoleOut.PrintCountOfIterations(height, iterationCount);
                 System.Threading.Thread.Sleep(Constants.threadDelay);

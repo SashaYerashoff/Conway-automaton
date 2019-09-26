@@ -68,7 +68,6 @@ namespace ConwayAutomaton
                     {
                         gameFieldBuffer[cellRowPosition, cellColumnPosition] = true;
                     }
-
                     else if ( reproduce && !cellIsAlive)
                     {
                         gameFieldBuffer[cellRowPosition, cellColumnPosition] = true;
@@ -78,8 +77,11 @@ namespace ConwayAutomaton
                         gameFieldBuffer[cellRowPosition, cellColumnPosition] = false;
                     }
                 }
-            }
+            }   
+        }
 
+        public void OverwriteGameField(int height, int width, bool[,] gameField, bool[,] gameFieldBuffer)
+        {
             for (int cellRowPosition = 0; cellRowPosition < height; cellRowPosition++)
             {
                 for (int cellColumnPosition = 0; cellColumnPosition < width; cellColumnPosition++)
