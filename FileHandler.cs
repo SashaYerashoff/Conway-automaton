@@ -7,11 +7,20 @@ namespace ConwayAutomaton
     {
         public void SaveToNewFile(string fileName, bool[,] gameField)
         {
-            if (File.Exists(fileName))
+            try
+            {
+                if (File.Exists(fileName))
+                {
+                    throw new Exception();
+
+                }
+            }
+            catch (Exception)
             {
                 Console.WriteLine($"{fileName} already exists!");
-                return;
             }
+
+
             using (FileStream fs = new FileStream(fileName, FileMode.CreateNew))
             {
                 using (BinaryWriter saveGameField = new BinaryWriter(fs))
@@ -25,26 +34,18 @@ namespace ConwayAutomaton
             saveNewFieldDimensions(fileName, gameField);
         }
 
-        public void SaveToExistingFile(string fileName, bool[,] gameField)
-        {
-            using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Write))
-            {
-                using (BinaryWriter saveGameField = new BinaryWriter(fs))
-                {
-                    foreach (bool cellState in gameField)
-                    {
-                        saveGameField.Write(cellState);
-                    }
-                }
-            }
-            saveExistingFieldDimensions(fileName, gameField);
-        }
-
         public bool[,] readFromFile(string fileName)
         {
-            if (!File.Exists(fileName))
+            try
             {
-                Console.WriteLine($"There is no such file as `{fileName}`!");    
+                if (!File.Exists(fileName))
+                {
+                    throw new FileNotFoundException();
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine($"There is no such file as `{fileName}`!");
             }
 
             int[] heightWidth = readExistingFieldDimensions(fileName);
@@ -80,41 +81,31 @@ namespace ConwayAutomaton
                 }
             }
         }
-        public void saveExistingFieldDimensions(string fileName, bool[,] gameField)
-        {
-            string fieldSizeFileName = fileName + "_fieldsize";
-            using (FileStream fs = new FileStream(fieldSizeFileName, FileMode.Open, FileAccess.Write))
-            {
-                using (BinaryWriter saveGameFieldSize = new BinaryWriter(fs))
-                {
-                    saveGameFieldSize.Write(gameField.GetLength(0));
-                    saveGameFieldSize.Write(gameField.GetLength(1));
-                }
-            }
-        }
 
         public int[] readExistingFieldDimensions(string fileName)
         {
-            if (!File.Exists(fileName))
+            try
+            {
+                if (!File.Exists(fileName))
+                {
+                    throw new FileNotFoundException();
+                }
+            }
+            catch (FileNotFoundException)
             {
                 Console.WriteLine($"There is no such file as `{fileName}`!");
             }
-            else
+            string fieldSizeFileName = fileName + "_fieldsize";
+            int[] dimensions = new int[2];
+            using (FileStream fs = new FileStream(fieldSizeFileName, FileMode.Open, FileAccess.Read))
             {
-                string fieldSizeFileName = fileName + "_fieldsize";
-                int[] dimensions = new int[2];
-                using (FileStream fs = new FileStream(fieldSizeFileName, FileMode.Open, FileAccess.Read))
+                using (BinaryReader readGameFieldSize = new BinaryReader(fs))
                 {
-                    using (BinaryReader readGameFieldSize = new BinaryReader(fs))
-                    {
-                        dimensions[0] = readGameFieldSize.ReadInt32();
-                        dimensions[1] = readGameFieldSize.ReadInt32();
-                    }
+                    dimensions[0] = readGameFieldSize.ReadInt32();
+                    dimensions[1] = readGameFieldSize.ReadInt32();
                 }
-                return dimensions;
             }
-            return null;
-
+            return dimensions;
         }
     }
 }

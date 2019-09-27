@@ -5,23 +5,25 @@ namespace ConwayAutomaton
     public class ConsoleInput
     {
         ConsoleSupportOut consoleOut = new ConsoleSupportOut();
-        
+        Validation validateDimensions = new Validation();
+
+
         public int GetHeight()
         {
             consoleOut.AskForHeight();
-            int height = Convert.ToInt16(Console.ReadLine());
+            int height = validateDimensions.ValidateDimensions();
             return height;
         }
 
         public int GetWidth()
         {
             consoleOut.AskForWidth();
-            int width = Convert.ToInt16(Console.ReadLine());
+            int width = validateDimensions.ValidateDimensions();
             return width;
         }
+
         public bool YesOrNo()
         {
-            consoleOut.AskForYesOrNo();
             string userInput = Console.ReadLine();
             if (userInput == "y")
             {
@@ -29,6 +31,7 @@ namespace ConwayAutomaton
             }
             return false;
         }
+
         public string GetFileName()
         {
             string fileName = Console.ReadLine();

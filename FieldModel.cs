@@ -2,7 +2,7 @@
 namespace ConwayAutomaton
 {
     public class FieldModel
-    { 
+    {
         public bool[,] gameField { get; set; }
         public bool[,] gameFieldBuffer { get; set; }
 

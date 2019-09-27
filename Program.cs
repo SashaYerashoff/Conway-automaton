@@ -5,8 +5,8 @@ namespace ConwayAutomaton
     {
         public static void Main()
         {
-            ConsoleGameLauncher gameWithOutput = new ConsoleGameLauncher();
-            gameWithOutput.Run();
-        }   
+            Menu menu = new Menu();
+            menu.run();
+        }
     }
 }

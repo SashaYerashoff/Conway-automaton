@@ -3,7 +3,7 @@
 namespace ConwayAutomaton
 {
     public class FieldDrawer
-    { 
+    {
         public void PrintArray(bool[,] fieldToPrint)
         {
             Console.Clear();
@@ -21,7 +21,7 @@ namespace ConwayAutomaton
                     }
                 }
                 Console.WriteLine();
-            } 
+            }
             Console.SetCursorPosition(0, Console.WindowTop);
             Console.CursorVisible = false;
 
